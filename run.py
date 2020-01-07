@@ -27,3 +27,22 @@ def login():
 
     flash("Failed to log in. The username or password provided did not match any accounts.")
     return redirect(url_for('home'))
+
+# signup route redirects to the register page template
+@app.route("/signup")
+def signup():
+    return render_template("register.html")
+
+# register for a new account page
+@app.route("/register", methods=['POST'])
+def register():
+    username = request.form.get('user')
+    password = request.form.get('pw')
+
+    #if (db_ops.accountExists(username)):
+    #    flash("This username is already in use. Try another one.")
+    #    return redirect(url_for('signup'))
+
+    #db_ops.addAccount(username, password)
+    #flash("You have successfully created your account. Please log in now.")
+    return redirect(url_for('home'))
