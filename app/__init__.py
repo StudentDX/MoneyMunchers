@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, session
+from app.models import db, Users, Expenses
 
 app = Flask(__name__)
 
