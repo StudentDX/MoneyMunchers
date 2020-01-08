@@ -1,9 +1,9 @@
 from os import urandom
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, flash
 from app.models import db, Users, Expenses
-from flask_login import LoginManager, login_required
+from flask_login import LoginManager, login_required, login_user, logout_user
 
-from app.forms import SignUpForm
+from app.forms import SignUpForm, LogInForm
 
 app = Flask(__name__)
 
@@ -34,14 +34,41 @@ def home():
 def signup():
     register_form = SignUpForm()
     if register_form.validate_on_submit():
-        return
+        username = register_form.username.data
+        password = register_form.password.data
+        if Users.query.filter_by(username=username).first() is not None:
+            flash('Username is taken!','danger')
+        else:
+            account = Users(username,password)
+            db.session.add(account)
+            db.session.commit()
+            flash('Account created successfully!','success')
+        return redirect(url_for('login'))
+    elif request.method == 'POST':
+        flash('Account creation failed!','danger')
     return render_template('signup.html',form=register_form)
 
-@app.route('/login')
+@app.route('/login',methods=['GET','POST'])
 def login():
-    return
+    login_form = LogInForm()
+    if login_form.validate_on_submit():
+        username = login_form.username.data
+        password = login_form.password.data
+        user = Users.query.filter_by(username=username).first()
+        if user is None or user.password != password:
+            flash('Incorrect credentials!','danger')
+        else:
+            login_user(user)
+            flash('Logged in successfully!','success')
+            return redirect(url_for('home'))
+    elif request.method == 'POST':
+        flash('Authentication failed!','danger')
+    return render_template('login.html',form=login_form)
 
 @app.route('/logout')
 @login_required
 def logout():
-    return
+    session.clear()
+    logout_user()
+    flash('Logged out succesfully!','success')
+    return redirect(url_for('home'))

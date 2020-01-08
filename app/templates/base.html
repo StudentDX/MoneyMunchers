@@ -27,6 +27,11 @@
         <nav class="navbar" style="background-color:grey;">
             Navbar here
         </nav>
+
+        {% for message in get_flashed_messages() %}
+            {{ message }}
+        {% endfor %}
+
     <br><br><br>
 
     {% block content %}
