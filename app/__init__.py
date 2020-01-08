@@ -21,7 +21,7 @@ login_manager.login_view = ''
 login_manager.login_message = 'Log in to view this page!'
 login_manager.login_message_category = 'danger'
 
-@login_manager.user_loader()
+@login_manager.user_loader
 def load_user(user_id):
     return Users.query.get(user_id)
 
