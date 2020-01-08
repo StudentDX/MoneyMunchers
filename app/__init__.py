@@ -1,7 +1,7 @@
 from os import urandom
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 from app.models import db, Users, Expenses
-from flask_login import LoginManager, login_required, login_user, logout_user
+from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 
 from app.forms import SignUpForm, LogInForm
 
