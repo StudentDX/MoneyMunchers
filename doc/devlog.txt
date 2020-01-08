@@ -5,6 +5,10 @@ ericL -- 2020-01-07 08:30
     Created template files
     Created database
 
+sofatV -- 2020-01-07 8:40
+    Implemented session handling
+    Finished backend code for registration, login, and logout pages 
+
 emoryW -- 2020-01-07 09:45
     Added routes to login and registration pages
     Added templates for new pages
