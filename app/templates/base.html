@@ -69,7 +69,9 @@
         <br><br><br>
 
         {% for type,message in get_flashed_messages(with_categories=true) %}
-            <div class="alert alert-{{ type }}" role="alert">{{ message }}</div>
+            <div class="alert alert-{{ type }} mx-auto" role="alert" style="width:80%;text-align:center">
+                {{ message }}
+            </div>
         {% endfor %}
 
         {% block content %}
