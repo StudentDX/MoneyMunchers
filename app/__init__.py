@@ -9,7 +9,7 @@ from app.forms import SignUpForm, LogInForm
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = urandom(64)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../database.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../data/database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = 'False'
 
 db.init_app(app)
@@ -84,3 +84,8 @@ def logout():
     logout_user()
     flash('Logged out succesfully!','success')
     return redirect(url_for('home'))
+
+@app.route('/profile')
+@login_required
+def profile():
+    return render_template('profile.html',user = current_user.username, balance = current_user.budget)
