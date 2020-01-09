@@ -5,9 +5,24 @@ ericL -- 2020-01-07 08:30
     Created template files
     Created database
 
+sofatV -- 2020-01-07 08:40
+    Implemented session handling
+    Finished backend code for registration, login, and logout pages 
+
 emoryW -- 2020-01-07 09:45
     Added routes to login and registration pages
     Added templates for new pages
 
 ericL -- 2020-01-07 23:00
     Finished session handling
+
+ericL -- 2020-01-07 08:15
+    Strapped some boots on navbar and footer
+
+ericL -- 2020-01-07 23:15
+    Strapped boots (with some js) on sign up and log in pages
+    
+davidX -- 2020-01-08 02:13
+    Updated User database design to have more features with reqard to budgeting
+    Added Monthly and Annual Budgetting to Extra Features
+    Noted Suggestion to have email extension as a potential feature.
