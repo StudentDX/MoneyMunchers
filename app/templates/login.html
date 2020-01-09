@@ -3,10 +3,24 @@
 {% block title %} Log In{% endblock %}
 
 {% block content %}
-<form method="POST">
-    {{ form.csrf_token }}
-    <div>{{ form.username.label }}: {{ form.username() }}</div>
-    <div>{{ form.password.label }}: {{ form.password() }}</div>
-    <div>{{ form.submit() }}</div>
-</form>
+<div class="card mx-auto" style="width:50%">
+    <div class="card-body">
+        <form method="POST">
+            {{ form.csrf_token }}
+            <div class="form-group">
+                <label for="user-field">{{ form.username.label }}</label>
+                {{ form.username() }}
+            </div>
+            <div class="form-group">
+                <label for="pass-field">{{ form.password.label }}</label>
+                {{ form.password() }}
+            </div>
+            <div>{{ form.submit() }}</div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="../static/js/login.js"></script>
 {% endblock %}
