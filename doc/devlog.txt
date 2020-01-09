@@ -14,10 +14,14 @@ emoryW -- 2020-01-07 09:45
     Added templates for new pages
 
 ericL -- 2020-01-07 23:00
-    Finished session handling
+    Improved session handling
 
 ericL -- 2020-01-07 08:15
     Strapped some boots on navbar and footer
 
 ericL -- 2020-01-07 23:15
     Strapped boots (with some js) on sign up and log in pages
+
+ericL -- 2020-01-08 10:00
+    Secured sign up and log in pages
+    Improved flashing
