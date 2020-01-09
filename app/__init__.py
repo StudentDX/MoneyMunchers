@@ -2,6 +2,7 @@ from os import urandom
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 from app.models import db, Users, Expenses
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
+from functools import wraps
 
 from app.forms import SignUpForm, LogInForm
 
@@ -18,8 +19,17 @@ with app.app_context():
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = ''
-login_manager.login_message = 'Log in to view this page!'
 login_manager.login_message_category = 'danger'
+login_manager.login_view = 'login'
+
+def restrict_authenticated(route):
+    @wraps(route)
+    def restrict(*args,**kwargs):
+        if current_user.is_authenticated:
+            flash('You are already logged in!','danger')
+            return redirect(url_for('profile'))
+        return route(*args,**kwargs)
+    return restrict
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -31,6 +41,7 @@ def home():
     return render_template('home.html')
 
 @app.route('/signup',methods=['GET','POST'])
+@restrict_authenticated
 def signup():
     register_form = SignUpForm()
     if register_form.validate_on_submit():
@@ -49,6 +60,7 @@ def signup():
     return render_template('signup.html',form=register_form)
 
 @app.route('/login',methods=['GET','POST'])
+@restrict_authenticated
 def login():
     login_form = LogInForm()
     if login_form.validate_on_submit():
@@ -60,7 +72,7 @@ def login():
         else:
             login_user(user)
             flash('Logged in successfully!','success')
-            return redirect(url_for('home'))
+            return redirect(url_for('profile'))
     elif request.method == 'POST':
         flash('Authentication failed!','danger')
     return render_template('login.html',form=login_form)
