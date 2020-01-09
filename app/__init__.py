@@ -72,3 +72,8 @@ def logout():
     logout_user()
     flash('Logged out succesfully!','success')
     return redirect(url_for('home'))
+
+@app.route('/profile')
+@login_required
+def profile():
+    return render_template('profile.html',user = current_user.username)
