@@ -66,11 +66,11 @@
             </div>
         </nav>
 
-        {% for message in get_flashed_messages() %}
-            {{ message }}
-        {% endfor %}
-
         <br><br><br>
+
+        {% for type,message in get_flashed_messages(with_categories=true) %}
+            <div class="alert alert-{{ type }}" role="alert">{{ message }}</div>
+        {% endfor %}
 
         {% block content %}
         {% endblock %}
