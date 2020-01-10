@@ -69,8 +69,11 @@
         <br><br><br>
 
         {% for type,message in get_flashed_messages(with_categories=true) %}
-            <div class="alert alert-{{ type }} mx-auto" role="alert" style="width:80%;text-align:center">
+            <div class="alert alert-{{ type }} mx-auto alert-dismissable" role="alert" style="width:80%;text-align:center">
                 {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
             </div>
         {% endfor %}
 
