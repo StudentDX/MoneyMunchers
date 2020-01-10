@@ -26,8 +26,8 @@ Our project is a budget management application. Users will be able to record the
 
 ## How to Use:
 Input your API keys:
-* <API that needs key>
-  * <instructions to get key>
+* "API that needs key"
+  * "instructions to get key"
   
 Create a virtual machine:
 ```
