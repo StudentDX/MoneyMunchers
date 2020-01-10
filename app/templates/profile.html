@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+
+{% block title %} {% endblock %}
+
+{% block content %}
+
+Welcome {{user}}
+
+Your current balance is ${{balance}}
+
+
+<button type="button" class="btn btn-outline-info">Add Income</button>
+<button type="button" class="btn btn-outline-info">Add Expense</button>
+
+{% endblock %}
