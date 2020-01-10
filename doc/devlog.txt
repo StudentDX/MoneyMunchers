@@ -30,6 +30,9 @@ davidX -- 2020-01-08 02:13
 emoryW -- 2020-01-09 08:41
     Added alerts for incorrect login
 
+sofatV -- 2020-01-08 9:00
+    Added a profile page and linked other pages properly to it-- to continue to work on it
+
 ericL -- 2020-01-08 10:00
     Secured sign up and log in pages
     Improved flashing
