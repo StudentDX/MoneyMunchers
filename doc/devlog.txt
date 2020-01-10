@@ -27,12 +27,16 @@ davidX -- 2020-01-08 02:13
     Added Monthly and Annual Budgetting to Extra Features
     Noted Suggestion to have email extension as a potential feature.
 
-emoryW -- 2020-01-09 08:41
-    Added alerts for incorrect login
-
 sofatV -- 2020-01-08 9:00
     Added a profile page and linked other pages properly to it-- to continue to work on it
 
 ericL -- 2020-01-08 10:00
     Secured sign up and log in pages
     Improved flashing
+
+  emoryW -- 2020-01-09 08:41
+      Added alerts for incorrect login
+
+  emoryW -- 2020-01-09 19:30
+      Fixed alerts because two were showing up
+      Made alerts dismissable
