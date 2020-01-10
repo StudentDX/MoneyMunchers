@@ -17,4 +17,8 @@ Our project is a budget management application. Users will be able to record the
 * CanvasJS Graphing API
 
 ## How to Use:
-
+Run the following commands:
+```
+pip install -r ./doc/requirements.txt
+python app.py
+```
