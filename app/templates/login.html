@@ -1,28 +1,8 @@
 {% extends 'base.html' %}
 
-{% block title %} Log In{% endblock %}
+{% block title %}Log In{% endblock %}
 
 {% block content %}
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <div class="container">
-      <div class="row">
-        <div class="col-sm">
-        </div>
-        <div class="col-lg">
-          <div class="alert alert-danger alert-dismissible" role="alert" style="width:50">
-            {{ messages[0] }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        </div>
-        <div class="col-sm">
-        </div>
-      </div>
-    </div>
-  {% endif %}
-{% endwith %}
 <div class="card mx-auto" style="width:50%" >
     <div class="card-body">
         <form method="POST">
