@@ -23,16 +23,16 @@ ericL -- 2020-01-07 23:15
     Strapped boots (with some js) on sign up and log in pages
 
 davidX -- 2020-01-08 02:13
-    Updated User database design to have more features with reqard to budgeting
-    Added Monthly and Annual Budgetting to Extra Features
+    Updated User database design to have more features with regard to budgeting
+    Added Monthly and Annual Budgeting to Extra Features
     Noted Suggestion to have email extension as a potential feature.
 
 emoryW -- 2020-01-09 08:41
     Added alerts for incorrect login
 
-sofatV -- 2020-01-08 9:00
+sofatV -- 2020-01-09 09:00
     Added a profile page and linked other pages properly to it-- to continue to work on it
 
-ericL -- 2020-01-08 10:00
+ericL -- 2020-01-09 10:00
     Secured sign up and log in pages
     Improved flashing
