@@ -36,3 +36,10 @@ sofatV -- 2020-01-09 09:00
 ericL -- 2020-01-09 10:00
     Secured sign up and log in pages
     Improved flashing
+
+emoryW -- 2020-01-09 08:41
+    Added alerts for incorrect login
+
+emoryW -- 2020-01-09 19:30
+    Fixed alerts because two were showing up
+    Made alerts dismissable

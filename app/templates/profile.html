@@ -1,16 +1,55 @@
 {% extends 'base.html' %}
+<style>
+  body {
+  padding-top: 80px;
+  text-align: center;
+  font-family: monaco, monospace;
+}
+h1, h2 {
+  display: inline-block;
+  background: #fff;
+}
+h1 {
+  font-size: 30px
+}
+h2 {
+  font-size: 20px;
+}
 
+</style>
 
 {% block title %} {% endblock %}
 
 {% block content %}
+<style>
+high {
+  background: #fd0;
+}
+</style>
+<h1>Welcome <high>{{user}}</high></h1><br>
 
-Welcome {{user}}
 
-Your current balance is ${{balance}}
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h2>Your current balance is $ {{balance}}</h2>
+    </div>
+    <div class="col-sm">
+      <button type="button" class="btn btn-outline-info">Add Income</button>
+      <button type="button" class="btn btn-outline-info">Add Expense</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm">
+      <h2> Places Nearby </h2>
+      <p> Implement API here </p>
+    </div>
+    <div class="col-sm">
+      <h2> History </h2>
+      <p> Add History to Database with filters here </p>
+  </div>
+</div>
 
 
-<button type="button" class="btn btn-outline-info">Add Income</button>
-<button type="button" class="btn btn-outline-info">Add Expense</button>
 
 {% endblock %}
