@@ -7,7 +7,8 @@ class Users(db.Model,UserMixin):
     id = db.Column(db.Integer,primary_key=True,nullable=False)
     username = db.Column(db.String(80),unique=True,nullable=False)
     password = db.Column(db.String(80),nullable=False)
-    budget = db.Column(db.Float)
+    daily_budget = db.Column(db.Float)
+    monthly_budget = db.Column(db.Float)
 
     expenses = db.relationship('Expenses',backref='user')
 

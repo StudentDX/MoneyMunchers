@@ -1,55 +1,101 @@
 {% extends 'base.html' %}
+
+{% block style %}
 <style>
-  body {
-  padding-top: 80px;
-  text-align: center;
-  font-family: monaco, monospace;
-}
-h1, h2 {
-  display: inline-block;
-  background: #fff;
-}
-h1 {
-  font-size: 30px
-}
-h2 {
-  font-size: 20px;
-}
-
+    input[type=submit] {
+        display: none;
+    }
+    .card {
+        margin: 10px;
+    }
+    .column {
+        width: 50%;
+    }
 </style>
+{% endblock %}
 
-{% block title %} {% endblock %}
+{% block title %}{{ user.username }}'s Profile{% endblock %}
 
 {% block content %}
-<style>
-high {
-  background: #fd0;
-}
-</style>
-<h1>Welcome <high>{{user}}</high></h1><br>
-
-
 <div class="container">
-  <div class="row">
-    <div class="col-sm">
-      <h2>Your current balance is $ {{balance}}</h2>
+    <h1 align="center">Welcome, {{ user.username }}</h1>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="column">
+                <div class="card">
+                    <div class="card-header">Daily Budget</div>
+                    <div class="card-body">
+                        {% if user.daily_budget is not none %}
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    Remaining Budget:
+                                </li>
+                                <li class="list-group-item">
+                                    Total Budget: {{ user.daily_budget }}
+                                </li>
+                            </ul>
+                        {% else %}
+                            <h5 class="card-title">You haven't set a daily budget!</h5>
+                            <button class="btn btn-primary" type="button" data-target="#daily" data-toggle="collapse" aria-expanded="false" aria-controls="daily">
+                                Set one now
+                            </button>
+                            <div class="collapse" id="daily">
+                                <hr>
+                                <form method="POST">
+                                    {{ daily.csrf_token }}
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">$</span>
+                                        </div>
+                                        {{ daily.amount() }}
+                                    </div>
+                                    <div class="input-group-append">{{ daily.submit() }}</div>
+                                </form>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        <div class="column">
+            <div class="card">
+                <div class="card-header">Monthly Budget</div>
+                <div class="card-body">
+                    {% if user.monthly_budget is not none %}
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                Remaining Budget:
+                            </li>
+                            <li class="list-group-item">
+                                Total Budget: {{ user.monthly_budget }}
+                            </li>
+                        </ul>
+                    {% else %}
+                        <h5 class="card-title">You haven't set a monthly budget!</h5>
+                        <button class="btn btn-primary" type="button" data-target="#monthly" data-toggle="collapse" aria-expanded="false" aria-controls="monthly">
+                            Set one now
+                        </button>
+                        <div class="collapse" id="monthly">
+                        <hr>
+                            <form method="POST">
+                                {{ monthly.csrf_token }}
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    {{ monthly.amount() }}
+                                </div>
+                                <div class="input-group-append">{{ monthly.submit() }}</div>
+                            </form>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-sm">
-      <button type="button" class="btn btn-outline-info">Add Income</button>
-      <button type="button" class="btn btn-outline-info">Add Expense</button>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm">
-      <h2> Places Nearby </h2>
-      <p> Implement API here </p>
-    </div>
-    <div class="col-sm">
-      <h2> History </h2>
-      <p> Add History to Database with filters here </p>
-  </div>
 </div>
+{% endblock %}
 
-
-
+{% block script %}
+<script src="../static/js/profile.js"></script>
 {% endblock %}

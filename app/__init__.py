@@ -4,7 +4,7 @@ from app.models import db, Users, Expenses
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from functools import wraps
 
-from app.forms import SignUpForm, LogInForm
+from app.forms import SignUpForm, LogInForm, BudgetForm
 
 app = Flask(__name__)
 
@@ -85,7 +85,20 @@ def logout():
     flash('Logged out succesfully!','success')
     return redirect(url_for('home'))
 
-@app.route('/profile')
+@app.route('/profile',methods=['GET','POST'])
 @login_required
 def profile():
-    return render_template('profile.html',user = current_user.username, balance = current_user.budget)
+    daily_form = BudgetForm('daily_submit')
+    monthly_form = BudgetForm('monthly_submit')
+    print(request.form)
+    if 'daily_submit' in request.form and daily_form.validate_on_submit():
+        amount = daily_form.amount.data
+        current_user.daily_budget = amount
+        db.session.commit()
+    elif 'monthly_submit' in request.form and monthly_form.validate_on_submit():
+        amount = monthly_form.amount.data
+        current_user.monthly_budget = amount
+        db.session.commit()
+    elif request.method == 'POST':
+        flash('Invalid budget!','danger')
+    return render_template('profile.html',user=current_user,daily=daily_form,monthly=monthly_form)
