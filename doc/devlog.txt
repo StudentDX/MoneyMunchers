@@ -44,6 +44,5 @@ emoryW -- 2020-01-09 19:30
     Fixed alerts because two were showing up
     Made alerts dismissable
 
-ericL -- 2020-01-13 00:06
-    Improved profile page
-    Implemented adding budgets
+ericL -- 2020-01-13 08:11
+		Updated in README launch instructions
