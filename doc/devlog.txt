@@ -45,5 +45,8 @@ emoryW -- 2020-01-09 19:30
     Made alerts dismissable
 
 ericL -- 2020-01-13 00:06
-    Improved profile page
+		Improved profile page
     Implemented adding budgets
+    
+davidX -- 2020-01-13 08:11
+    Updated in README launch instructions

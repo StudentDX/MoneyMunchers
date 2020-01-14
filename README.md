@@ -51,5 +51,5 @@ pip install -r ./doc/requirements.txt
 
 Run app:
 ```
-python app.py
+python run.py
 ```
