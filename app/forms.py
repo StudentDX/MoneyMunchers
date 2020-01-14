@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, DecimalField
+from wtforms import StringField, PasswordField, SubmitField, DecimalField, DateField, TimeField
 from wtforms.validators import DataRequired, Length, EqualTo
 
 #class ButtonField(SubmitField):
@@ -26,6 +26,7 @@ class BudgetForm(FlaskForm):
 class ExpenseForm(FlaskForm):
     amount = DecimalField('Amount',validators=[DataRequired()],places=2)
     location = StringField('Location',validators=[DataRequired(),Length(max=80)])
-    datetime = StringField('Date and Time',validators=[DataRequired(),Length(max=19)])
+    date = DateField('Date',validators=[DataRequired()])
+    time = TimeField('Time',validators=[DataRequired()])
     type = StringField('Type',validators=[DataRequired(),Length(max=80)])
     submit = SubmitField('Record')

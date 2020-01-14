@@ -8,9 +8,14 @@ var location_field = document.getElementById('location');
 location_field.setAttribute('class','form-control');
 location_field.setAttribute('placeholder','Whole Foods');
 
-var datetime_field = document.getElementById('datetime');
-datetime_field.setAttribute('class','form-control');
-datetime_field.setAttribute('placeholder','2020-1-16 12:00:00');
+var date_field = document.getElementById('date');
+date_field.setAttribute('class','form-control');
+date_field.setAttribute('type','date');
+
+var time_field = document.getElementById('time');
+time_field.setAttribute('class','form-control');
+time_field.setAttribute('type','time');
+time_field.setAttribute('step','1');
 
 var type_field = document.getElementById('type');
 type_field.setAttribute('class','form-control');

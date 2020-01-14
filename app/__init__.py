@@ -90,7 +90,6 @@ def logout():
 def profile():
     daily_form = BudgetForm('daily_submit')
     monthly_form = BudgetForm('monthly_submit')
-    print(current_user.expenses)
     if 'daily_submit' in request.form and daily_form.validate_on_submit():
         amount = daily_form.amount.data
         current_user.daily_budget = amount
@@ -110,13 +109,15 @@ def expense():
     if expense_form.validate_on_submit():
         amount = expense_form.amount.data
         place = expense_form.location.data
-        date = expense_form.datetime.data
+        date = expense_form.date.data
+        time = expense_form.time.data
+        datetime = str(date) + ' ' + str(time)
         type = expense_form.type.data
-        expense = Expenses(current_user.id,amount,place,date,type)
+        expense = Expenses(current_user.id,amount,place,datetime,type)
         db.session.add(expense)
         db.session.commit()
         flash('Recorded expense!','success')
         return redirect(url_for('profile'))
     elif request.method == 'POST':
-        flash('Invalid expense!','danger')
+        flash('Invalid expense','danger')
     return render_template('expense.html',form=expense_form)
