@@ -17,8 +17,15 @@ class LogInForm(FlaskForm):
     submit = SubmitField('Log In')
 
 class BudgetForm(FlaskForm):
-    amount = DecimalField('Amount',validators=[DataRequired()])
+    amount = DecimalField('Amount',validators=[DataRequired()],places=2)
     
     def __init__(self,submit):
         super().__init__()
         self.submit = SubmitField(_form=self,_name=submit)
+
+class ExpenseForm(FlaskForm):
+    amount = DecimalField('Amount',validators=[DataRequired()],places=2)
+    location = StringField('Location',validators=[DataRequired(),Length(max=80)])
+    datetime = StringField('Date and Time',validators=[DataRequired(),Length(max=19)])
+    type = StringField('Type',validators=[DataRequired(),Length(max=80)])
+    submit = SubmitField('Record')

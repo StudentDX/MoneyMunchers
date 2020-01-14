@@ -98,7 +98,13 @@
                 <div class="card-header" align="center">Expense History</div>
                 <div class="card-body" style="text-align: center">
                     {% if user.expenses|length > 0 %}
-                        Something
+                        <ul class="list-group list-group-flush">
+                        {% for expense in user.expenses %}
+                            <li class="list-group-item">
+                                ${{ expense.amount }} at {{ expense.place }}
+                            </li>
+                        {% endfor %}
+                        </ul>
                     {% else %}
                         <i>You haven't recorded any expenses</i>
                     {% endif %}

@@ -24,6 +24,9 @@ class Expenses(db.Model):
     date = db.Column(db.Text)
     type = db.Column(db.String(80))
 
-    def __int__(self,user,amount):
-        self.user = user
+    def __init__(self,user_id,amount,place,date,type):
+        self.user_id = user_id
         self.amount = amount
+        self.place = place
+        self.date = date
+        self.type = type
