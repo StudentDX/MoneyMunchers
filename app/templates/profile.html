@@ -97,17 +97,26 @@
             <div class="card" style="width:100%">
                 <div class="card-header" align="center">Expense History</div>
                 <div class="card-body" style="text-align: center">
+                  <div id="accordian">
                     {% if user.expenses|length > 0 %}
                         <ul class="list-group list-group-flush">
                         {% for expense in user.expenses %}
                             <li class="list-group-item">
+                              <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                 ${{ expense.amount }} at {{ expense.place }}
+                              </button>
+                              <div id="collapse{{d}}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+
+                                  Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+
+                              </div>
                             </li>
                         {% endfor %}
                         </ul>
                     {% else %}
                         <i>You haven't recorded any expenses</i>
                     {% endif %}
+                  </div>
                 </div>
             </div>
         </div>
