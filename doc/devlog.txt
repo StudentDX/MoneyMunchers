@@ -58,3 +58,10 @@ ericL -- 2020-01-13 21:35
     Updated database schema
     Implemented recording expenses
     Improved recording date and time of expenses
+    
+davidX -- 2020-01-14 08:20
+		Updated api names in doc to remove spaces.
+		Updated design.pdf
+			Home Page and Profile Page updated in site map
+			doDailyBudget and doMonthlyBudget removed from Users in database map
+			Removed billing and investments from extra features
