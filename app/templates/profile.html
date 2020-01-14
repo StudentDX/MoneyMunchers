@@ -29,7 +29,7 @@
                         {% if user.daily_budget is not none %}
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
-                                    Remaining Budget:
+                                    Remaining Budget: {{ user.daily_balance() }}
                                 </li>
                                 <li class="list-group-item">
                                     Total Budget: {{ user.daily_budget }}
@@ -64,7 +64,7 @@
                         {% if user.monthly_budget is not none %}
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
-                                    Remaining Budget:
+                                    Remaining Budget: {{ user.monthly_balance() }}
                                 </li>
                                 <li class="list-group-item">
                                     Total Budget: {{ user.monthly_budget }}
