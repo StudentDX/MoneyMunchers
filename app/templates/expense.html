@@ -1,14 +1,52 @@
 {% extends 'base.html' %}
 
+{% block content %}
 <div class="container">
     <div class="card">
-        <div class="card-header">
-
+        <div class="card-header" style="text-align: center">
+            Record an Expense
         </div>
         <div class="card-body">
             <form method="POST">
-
+                {{ form.csrf_token }}
+                <div class="form-group">
+                    <label for="amount">{{ form.amount.label }}</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                        </div>
+                        {{ form.amount }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="location">{{ form.location.label }}</label>
+                    {{ form.location }}
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="date">{{ form.date.label }}</label>
+                            {{ form.date }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="col">
+                            <label for="time">{{ form.time.label }}</label>
+                            {{ form.time }}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="type">{{ form.type.label }}</label>
+                    {{ form.type }}
+                </div>
+                <div>{{ form.submit }}</div>
             </form>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block script %}
+<script src="../static/js/expense.js"></script>
+{% endblock %}
