@@ -47,6 +47,9 @@ emoryW -- 2020-01-09 19:30
 ericL -- 2020-01-13 00:06
 		Improved profile page
     Implemented adding budgets
-    
+
 davidX -- 2020-01-13 08:11
     Updated in README launch instructions
+
+emoryW -- 2020-01-13 23:07
+    Added a help page to be updated later
