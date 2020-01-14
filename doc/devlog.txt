@@ -58,3 +58,6 @@ ericL -- 2020-01-13 21:35
     Updated database schema
     Implemented recording expenses
     Improved recording date and time of expenses
+
+ericL -- 2020-01-14 08:50
+    Implemented remaining budget
