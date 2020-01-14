@@ -45,7 +45,7 @@ emoryW -- 2020-01-09 19:30
     Made alerts dismissable
 
 ericL -- 2020-01-13 00:06
-		Improved profile page
+	Improved profile page
     Implemented adding budgets
 
 davidX -- 2020-01-13 08:11
@@ -53,3 +53,8 @@ davidX -- 2020-01-13 08:11
 
 emoryW -- 2020-01-13 23:07
     Added a help page to be updated later
+
+ericL -- 2020-01-13 21:35
+    Updated database schema
+    Implemented recording expenses
+    Improved recording date and time of expenses
