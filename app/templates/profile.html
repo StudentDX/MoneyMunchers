@@ -57,37 +57,50 @@
                     </div>
                 </div>
             </div>
-        <div class="column">
-            <div class="card">
-                <div class="card-header">Monthly Budget</div>
-                <div class="card-body">
-                    {% if user.monthly_budget is not none %}
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">
-                                Remaining Budget:
-                            </li>
-                            <li class="list-group-item">
-                                Total Budget: {{ user.monthly_budget }}
-                            </li>
-                        </ul>
-                    {% else %}
-                        <h5 class="card-title">You haven't set a monthly budget!</h5>
-                        <button class="btn btn-primary" type="button" data-target="#monthly" data-toggle="collapse" aria-expanded="false" aria-controls="monthly">
-                            Set one now
-                        </button>
-                        <div class="collapse" id="monthly">
-                        <hr>
-                            <form method="POST">
-                                {{ monthly.csrf_token }}
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">$</span>
+            <div class="column">
+                <div class="card">
+                    <div class="card-header">Monthly Budget</div>
+                    <div class="card-body">
+                        {% if user.monthly_budget is not none %}
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">
+                                    Remaining Budget:
+                                </li>
+                                <li class="list-group-item">
+                                    Total Budget: {{ user.monthly_budget }}
+                                </li>
+                            </ul>
+                        {% else %}
+                            <h5 class="card-title">You haven't set a monthly budget!</h5>
+                            <button class="btn btn-primary" type="button" data-target="#monthly" data-toggle="collapse" aria-expanded="false" aria-controls="monthly">
+                                Set one now
+                            </button>
+                            <div class="collapse" id="monthly">
+                            <hr>
+                                <form method="POST">
+                                    {{ monthly.csrf_token }}
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">$</span>
+                                        </div>
+                                        {{ monthly.amount() }}
                                     </div>
-                                    {{ monthly.amount() }}
-                                </div>
-                                <div class="input-group-append">{{ monthly.submit() }}</div>
-                            </form>
-                        </div>
+                                    <div class="input-group-append">{{ monthly.submit() }}</div>
+                                </form>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card" style="width:100%">
+                <div class="card-header" align="center">Expense History</div>
+                <div class="card-body" style="text-align: center">
+                    {% if user.expenses|length > 0 %}
+                        Something
+                    {% else %}
+                        <i>You haven't recorded any expenses</i>
                     {% endif %}
                 </div>
             </div>

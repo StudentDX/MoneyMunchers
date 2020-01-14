@@ -21,6 +21,8 @@ class Expenses(db.Model):
     user_id = db.Column(db.ForeignKey('users.id'))
     amount = db.Column(db.Float,nullable=False)
     place = db.Column(db.String(80))
+    date = db.Column(db.Text)
+    type = db.Column(db.String(80))
 
     def __int__(self,user,amount):
         self.user = user

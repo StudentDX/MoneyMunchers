@@ -90,7 +90,7 @@ def logout():
 def profile():
     daily_form = BudgetForm('daily_submit')
     monthly_form = BudgetForm('monthly_submit')
-    print(request.form)
+    print(current_user.expenses)
     if 'daily_submit' in request.form and daily_form.validate_on_submit():
         amount = daily_form.amount.data
         current_user.daily_budget = amount
@@ -102,3 +102,8 @@ def profile():
     elif request.method == 'POST':
         flash('Invalid budget!','danger')
     return render_template('profile.html',user=current_user,daily=daily_form,monthly=monthly_form)
+
+@app.route('/expense',methods=['GET','POST'])
+@login_required
+def expense():
+    return render_template('expense.html')

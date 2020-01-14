@@ -48,6 +48,9 @@
                 </ul>
                 <ul class="navbar-nav navbar-right">
                     {% if current_user.is_authenticated %}
+                        <form class="form-inline">
+                            <a class="btn btn-sm btn-outline-primary" href={{ url_for('expense') }} role="button">Record Expense</a>
+                        </form>
                         <li class="nav-item">
                             <a class="nav-link" href={{ url_for('logout') }}>Log Out</a>
                         </li>
