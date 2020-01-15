@@ -132,5 +132,7 @@ def expense():
         flash('Recorded expense!','success')
         return redirect(url_for('profile'))
     elif request.method == 'POST':
+        print(expense_form.errors)
+        print(request.form['time'])
         flash('Invalid expense','danger')
     return render_template('expense.html',form=expense_form)
