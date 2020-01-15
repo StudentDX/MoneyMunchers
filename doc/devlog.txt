@@ -77,9 +77,20 @@ emoryW -- 2020-01-14 21:26
     Finished collapsibles for the expenses
     Added alerts to notify that you're approaching/over daily/monthly budget
 
+ericL -- 2020-01-14 21:30
+    Fixed collapsing expenses in history
+    Improved money rendering
+
 davidX -- 2020-01-14 21:56
     Filled out homepage.
 
 vishwaaS -- 2020-01-14 22:55
     Finished layout for home page and most of designing
-    Worked with David to get text 
+    Worked with David to get text
+
+ericL -- 2020-01-14 23:50
+    Reformatted code
+    Fixed navbar alignment
+
+ericL -- 2020-01-14 23:59
+       Fixed adding a lower monthly than daily budget

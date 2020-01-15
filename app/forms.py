@@ -27,6 +27,6 @@ class ExpenseForm(FlaskForm):
     amount = DecimalField('Amount',validators=[DataRequired()],places=2)
     location = StringField('Location',validators=[DataRequired(),Length(max=80)])
     date = DateField('Date',validators=[DataRequired()])
-    time = TimeField('Time',validators=[DataRequired()])
+    time = TimeField('Time',validators=[DataRequired()],format='%H:%M:%S')
     type = StringField('Type',validators=[DataRequired(),Length(max=80)])
     submit = SubmitField('Record')
