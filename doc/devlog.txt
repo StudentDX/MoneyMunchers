@@ -91,3 +91,6 @@ vishwaaS -- 2020-01-14 22:55
 ericL -- 2020-01-14 23:50
     Reformatted code
     Fixed navbar alignment
+
+ericL -- 2020-01-14 23:59
+       Fixed adding a lower monthly than daily budget
