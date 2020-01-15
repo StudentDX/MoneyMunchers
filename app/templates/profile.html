@@ -97,20 +97,19 @@
             <div class="card" style="width:100%">
                 <div class="card-header" align="center">Expense History</div>
                 <div class="card-body" style="text-align: center">
-                  <div id="accordian">
                     {% if user.expenses|length > 0 %}
                         <ul class="list-group list-group-flush">
                         {% for expense in user.expenses %}
                             <li class="list-group-item">
-                                <a class="btn" data-toggle="collapse" href="#collapseOne" role="button" aria-expanded="false" aria-controls="collapseOne">
+                                <button class="btn" type="button" data-toggle="collapse" data-target="#{{expense.id}}" aria-expanded="false" aria-controls={{expense.id}}>
                                   ${{ expense.amount }} at {{ expense.place }}
-                                </a>
-                                <div class="collapse" id="collapseOne">
+                                </button>
+                                <div class="collapse" id={{expense.id}}>
                                   <div class="card card-body">
                                     Amount: ${{ expense.amount }}<br>
                                     Location: {{ expense.place }}<br>
-                                    Date/Time: <br>
-                                    Type: <br>
+                                    Date/Time: {{ expense.date }}<br>
+                                    Type: {{expense.type}}<br>
                                   </div>
                                 </div>
                             </li>
@@ -119,7 +118,6 @@
                     {% else %}
                         <i>You haven't recorded any expenses</i>
                     {% endif %}
-                  </div>
                 </div>
             </div>
         </div>
