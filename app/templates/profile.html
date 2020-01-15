@@ -29,7 +29,7 @@
                         {% if user.daily_budget is not none %}
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
-                                    Remaining Budget:
+                                    Remaining Budget: {{ user.daily_balance() }}
                                 </li>
                                 <li class="list-group-item">
                                     Total Budget: {{ user.daily_budget }}
@@ -64,7 +64,7 @@
                         {% if user.monthly_budget is not none %}
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
-                                    Remaining Budget:
+                                    Remaining Budget: {{ user.monthly_balance() }}
                                 </li>
                                 <li class="list-group-item">
                                     Total Budget: {{ user.monthly_budget }}
@@ -101,7 +101,17 @@
                         <ul class="list-group list-group-flush">
                         {% for expense in user.expenses %}
                             <li class="list-group-item">
-                                ${{ expense.amount }} at {{ expense.place }}
+                                <button class="btn" type="button" data-toggle="collapse" data-target="#{{expense.id}}" aria-expanded="false" aria-controls={{expense.id}}>
+                                  ${{ expense.amount }} at {{ expense.place }}
+                                </button>
+                                <div class="collapse" id={{expense.id}}>
+                                  <div class="card card-body">
+                                    Amount: ${{ expense.amount }}<br>
+                                    Location: {{ expense.place }}<br>
+                                    Date/Time: {{ expense.date }}<br>
+                                    Type: {{expense.type}}<br>
+                                  </div>
+                                </div>
                             </li>
                         {% endfor %}
                         </ul>
