@@ -93,14 +93,16 @@ def logout():
 @app.route('/profile',methods=['GET','POST'])
 @login_required
 def profile():
-    if current_user.daily_balance() < 10 and current_user.daily_balance() > 0:
-        flash('You are close to exceeding your daily budget.', 'warning')
-    if current_user.daily_balance() < 0:
-        flash('You have exceeded your daily budget.', 'danger')
-    if current_user.monthly_balance() < 10 and current_user.monthly_balance() > 0:
-        flash('You are close to exceeding your monthly budget.', 'warning')
-    if current_user.monthly_balance() < 0:
-        flash('You have exceeded your monthly budget.', 'danger')
+    if current_user.daily_budget is not None:
+        if current_user.daily_balance() < 10 and current_user.daily_balance() > 0:
+            flash('You are close to exceeding your daily budget.', 'warning')
+        if current_user.daily_balance() < 0:
+            flash('You have exceeded your daily budget.', 'danger')
+    if current_user.monthly_budget is not None:
+        if current_user.monthly_balance() < 10 and current_user.monthly_balance() > 0:
+            flash('You are close to exceeding your monthly budget.', 'warning')
+        if current_user.monthly_balance() < 0:
+            flash('You have exceeded your monthly budget.', 'danger')
     daily_form = BudgetForm('daily_submit')
     monthly_form = BudgetForm('monthly_submit')
     if 'daily_submit' in request.form and daily_form.validate_on_submit():
@@ -109,8 +111,11 @@ def profile():
         db.session.commit()
     elif 'monthly_submit' in request.form and monthly_form.validate_on_submit():
         amount = monthly_form.amount.data
-        current_user.monthly_budget = amount
-        db.session.commit()
+        if current_user.daily_budget is not None and amount < current_user.daily_budget:
+            flash('Monthly budget cannot be less than daily budget!','danger')
+        else:
+            current_user.monthly_budget = amount
+            db.session.commit()
     elif request.method == 'POST':
         flash('Invalid budget!','danger')
     return render_template('profile.html',user=current_user,daily=daily_form,monthly=monthly_form)
