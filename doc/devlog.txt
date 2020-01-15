@@ -96,4 +96,8 @@ ericL -- 2020-01-14 23:50
     Fixed navbar alignment
 
 ericL -- 2020-01-14 23:59
-       Fixed adding a lower monthly than daily budget
+    Fixed adding a lower monthly than daily budget
+
+vishwaaS -- 2020-01-15 8:40
+    Added text for home
+    Made functionality changes to profile
