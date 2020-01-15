@@ -31,6 +31,11 @@ def restrict_authenticated(route):
         return route(*args,**kwargs)
     return restrict
 
+def to_money(decimal):
+        return '$'+str(decimal) + ('0' if str(decimal)[-2:] == '.0' else '')
+
+app.jinja_env.filters['to_money'] = to_money
+
 @login_manager.user_loader
 def load_user(user_id):
     return Users.query.get(user_id)
