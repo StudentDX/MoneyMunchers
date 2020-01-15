@@ -72,10 +72,14 @@ emoryW -- 2020-01-14 08:38
 
 ericL -- 2020-01-14 08:50
     Implemented remaining budget
-    
+
 emoryW -- 2020-01-14 21:26
     Finished collapsibles for the expenses
     Added alerts to notify that you're approaching/over daily/monthly budget
-    
+
 davidX -- 2020-01-14 21:56
     Filled out homepage.
+
+vishwaaS -- 2020-01-14 22:55
+    Finished layout for home page and most of designing
+    Worked with David to get text 
