@@ -24,7 +24,10 @@
         <div class="row">
             <div class="column">
                 <div class="card">
-                    <div class="card-header">Daily Budget</div>
+                    <div class="card-header">
+                      Daily Budget
+                        <a href="/expense" class="btn float-right btn-primary active" role="button" aria-pressed="true">Change Budget</a>
+                    </div>
                     <div class="card-body">
                         {% if user.daily_budget is not none %}
                             <ul class="list-group list-group-flush">
@@ -59,7 +62,10 @@
             </div>
             <div class="column">
                 <div class="card">
-                    <div class="card-header">Monthly Budget</div>
+                    <div class="card-header">
+                      Monthly Budget
+                      <a href="/expense" class="btn float-right btn-primary active" role="button" aria-pressed="true">Change Budget</a>
+                    </div>
                     <div class="card-body">
                         {% if user.monthly_budget is not none %}
                             <ul class="list-group list-group-flush">
@@ -95,7 +101,10 @@
         </div>
         <div class="row">
             <div class="card" style="width:100%">
-                <div class="card-header" align="center">Expense History</div>
+                <div class="card-header" align="center">
+                  Expense History
+                  <a href="/expense" class="btn float-right btn-primary active" role="button" aria-pressed="true">Add Expenses</a>
+                </div>
                 <div class="card-body" style="text-align: center">
                     {% if user.expenses|length > 0 %}
                         <ul class="list-group list-group-flush">
