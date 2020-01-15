@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
+from datetime import date
 
 db = SQLAlchemy()
 
@@ -15,6 +16,18 @@ class Users(db.Model,UserMixin):
     def __init__(self,username,password):
         self.username = username
         self.password = password
+
+    def daily_balance(self):
+        balance = self.daily_budget
+        for expense in [e for e in self.expenses if e.date[:10] == str(date.today())]:
+            balance -= expense.amount
+        return balance
+
+    def monthly_balance(self):
+        balance = self.monthly_budget
+        for expense in [e for e in self.expenses if e.date[:7] == str(date.today())[:7]]:
+            balance -= expense.amount
+        return balance
 
 class Expenses(db.Model):
     id = db.Column(db.Integer,primary_key=True,nullable=False)
