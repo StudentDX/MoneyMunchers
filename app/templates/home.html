@@ -1,124 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-    <!-- Bootstrap CDN -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
-    {% block style %}
-    <style>
-        body  {
-          background-image: url("static/home-bg.jpeg");
-          background-color: #cccccc;
-        }
-    </style>
-    {% endblock %}
+{% extends 'base.html' %}
 
-    <head>
-        <meta charset="UTF-8">
-        <title>
-            {% block title %}
-            {% endblock %}
-        </title>
-        {% block heading %}
-        {% endblock %}
-    </head>
+{% block style %}
+<style>
+    body  {
+      background-image: url("static/home-bg.jpeg");
+      background-color: #cccccc;
+    }
+</style>
+{% endblock %}
 
-    <body>
-        <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-            <img src="../static/logo.png" width="30" height="30" alt="logo">
-            <a class="navbar-brand" href={{ url_for('home') }}>PepperMint</a>
-            <button id="hamburger" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Welcome</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav navbar-right">
-                        <li class="nav-item">
-                            <div class="row" id="authentication" style="width:11rem">
-                                <a class="nav-link mx-auto" href={{ url_for('signup') }}>Sign Up</a>
-                                <a class="nav-link disabled">or</a>
-                                <a class="nav-link mx-auto" href={{ url_for('login') }}>Log In</a>
-                            </div>
-                        </li>
-                </ul>
-            </div>
-        </nav>
+{% block content %}
+    <h5 class="display-4 font-weight-bold text-center text-white" style="-webkit-text-stroke: 2px black">
+        Control your money! Save yourself from debt!
+    </h5>
 
-        <br><br><br>
+    <br>
 
-        {% for type,message in get_flashed_messages(with_categories=true) %}
-            <div class="alert alert-{{ type }} mx-auto alert-dismissable" role="alert" style="width:80%;text-align:center">
-                {{ message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        {% endfor %}
+    <!-- description -->
+    <p class="text-white text-center bg-secondary rounded p-3" style="margin-left: 10%; margin-right: 10%;">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a orci scelerisque,
+        efficitur erat id, convallis sem. Nulla vel erat leo. Maecenas egestas tellus elit,
+        eget molestie nibh tempus eu. Pellentesque sollicitudin faucibus augue, molestie eleifend
+        libero. Phasellus nec enim dui. Class aptent taciti sociosqu ad litora torquent per
+        conubia nostra, per inceptos himenaeos. Mauris sollicitudin risus sed dui finibus, in
+        ultricies lorem consequat. Morbi vestibulum a metus sit amet vestibulum. Curabitur
+        facilisis leo nunc, et tristique tellus tincidunt eleifend. Etiam eget velit eu lectus
+        maximus iaculis eu eu est. Quisque nec hendrerit erat, et mattis metus. Mauris finibus
+        tempus porta. Nulla ullamcorper nisi sit amet felis molestie porta. Phasellus accumsan
+        leo nunc, sit amet bibendum nisl varius nec. Nullam sit amet fringilla metus, a cursus
+        metus.
+    </p>
 
-        {% block content %}
-        <div class="mx-auto" style="width: 200px;">
-          <h1><high><font color="red"></font></high></h1><br>
+    <br>
+
+    <div class="row" style="margin-left: 10%; margin-right: 10%;">
+        <div class="col bg-warning mx-3 p-3 rounded text-center">
+            <h1> HELLO! </h1>
         </div>
-          <br>
-          <h5 class="display-4 font-weight-bold text-center text-white" style="text-shadow: -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000, 3px 3px 0 #000;">Control your money! Save yourself from debt!</h5>
-          <br>
-          <!-- description -->
-          <p class="text-white text-center bg-secondary rounded p-3" style="margin-left: 10%; margin-right: 10%;">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a orci scelerisque,
-            efficitur erat id, convallis sem. Nulla vel erat leo. Maecenas egestas tellus elit,
-            eget molestie nibh tempus eu. Pellentesque sollicitudin faucibus augue, molestie eleifend
-            libero. Phasellus nec enim dui. Class aptent taciti sociosqu ad litora torquent per
-            conubia nostra, per inceptos himenaeos. Mauris sollicitudin risus sed dui finibus, in
-            ultricies lorem consequat. Morbi vestibulum a metus sit amet vestibulum. Curabitur
-            facilisis leo nunc, et tristique tellus tincidunt eleifend. Etiam eget velit eu lectus
-            maximus iaculis eu eu est. Quisque nec hendrerit erat, et mattis metus. Mauris finibus
-            tempus porta. Nulla ullamcorper nisi sit amet felis molestie porta. Phasellus accumsan
-            leo nunc, sit amet bibendum nisl varius nec. Nullam sit amet fringilla metus, a cursus
-            metus.
-          </p>
-
-          <br>
-
-          <div class="row" style="margin-left: 10%; margin-right: 10%;">
-            <div class="col bg-warning mx-3 p-3 rounded text-center">
-              <h1> HELLO! </h1>
-            </div>
-            <div class="col bg-warning mx-3 p-3 rounded text-center">
-              <h1> HELLO! </h1>
-            </div>
-            <div class="col bg-warning mx-3 p-3 rounded text-center">
-              <h1> HELLO! </h1>
-            </div>
-          </div>
-
-        {% endblock %}
-
-        <br><br><br>
-
-        <footer class="footer fixed-bottom bg-light">
-            <br>
-            <div style="text-align: center">
-                <span class="text-muted">
-                    &copy; MoneyMunchers 2019
-                </span>
-            </div>
-            <br>
-        </footer>
-    </body>
-
-    {% block script %}
-    {% endblock %}
-
-</html>
+        <div class="col bg-warning mx-3 p-3 rounded text-center">
+            <h1> HELLO! </h1>
+        </div>
+        <div class="col bg-warning mx-3 p-3 rounded text-center">
+            <h1> HELLO! </h1>
+        </div>
+    </div>
+{% endblock %}
