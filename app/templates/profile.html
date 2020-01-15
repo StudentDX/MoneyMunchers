@@ -29,10 +29,10 @@
                         {% if user.daily_budget is not none %}
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
-                                    Remaining Budget: {{ user.daily_balance() }}
+                                    Remaining Budget: {{ user.daily_balance()|to_money }}
                                 </li>
                                 <li class="list-group-item">
-                                    Total Budget: {{ user.daily_budget }}
+                                    Total Budget: {{ user.daily_budget|to_money }}
                                 </li>
                             </ul>
                         {% else %}
@@ -64,10 +64,10 @@
                         {% if user.monthly_budget is not none %}
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
-                                    Remaining Budget: {{ user.monthly_balance() }}
+                                    Remaining Budget: {{ user.monthly_balance()|to_money }}
                                 </li>
                                 <li class="list-group-item">
-                                    Total Budget: {{ user.monthly_budget }}
+                                    Total Budget: {{ user.monthly_budget|to_money }}
                                 </li>
                             </ul>
                         {% else %}
@@ -102,11 +102,11 @@
                         {% for expense in user.expenses %}
                             <li class="list-group-item">
                                 <button class="btn" type="button" data-toggle="collapse" data-target="#expense{{ expense.id }}" aria-expanded="false" aria-controls="expense{{ expense.id }}">
-                                    ${{ expense.amount }} at {{ expense.place }}
+                                    {{ expense.amount|to_money }} at {{ expense.place }}
                                 </button>
                                 <div class="collapse" id="expense{{ expense.id }}">
                                     <div class="card card-body">
-                                        Amount: ${{ expense.amount }}<br>
+                                        Amount: ${{ expense.amount|to_money }}<br>
                                         Location: {{ expense.place }}<br>
                                         Date/Time: {{ expense.date }}<br>
                                         Type: {{ expense.type }}<br>
