@@ -106,7 +106,7 @@
                                 </button>
                                 <div class="collapse" id="expense{{ expense.id }}">
                                     <div class="card card-body">
-                                        Amount: ${{ expense.amount|to_money }}<br>
+                                        Amount: {{ expense.amount|to_money }}<br>
                                         Location: {{ expense.place }}<br>
                                         Date/Time: {{ expense.date }}<br>
                                         Type: {{ expense.type }}<br>
