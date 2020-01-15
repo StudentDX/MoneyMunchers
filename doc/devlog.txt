@@ -72,3 +72,6 @@ emoryW -- 2020-01-14 08:38
 
 ericL -- 2020-01-14 08:50
     Implemented remaining budget
+
+davidX -- 2020-01-14 21:56
+    Filled out homepage.
