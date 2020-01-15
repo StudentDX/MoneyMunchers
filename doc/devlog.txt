@@ -77,6 +77,9 @@ emoryW -- 2020-01-14 21:26
     Finished collapsibles for the expenses
     Added alerts to notify that you're approaching/over daily/monthly budget
 
+vishwaaS -- 2020-01-14 22:55
+    Mock template for home
+
 ericL -- 2020-01-14 21:30
     Fixed collapsing expenses in history
     Improved money rendering
