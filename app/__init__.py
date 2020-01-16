@@ -134,8 +134,11 @@ def profile():
         amount = daily_form.amount.data
         rate = Exchanges.query.filter_by(id=current_user.currency_id).first().rate
         amount = float(amount) / rate
-        current_user.daily_budget = amount
-        db.session.commit()
+        if current_user.monthly_budget is not None and amount > current_user.monthly_budget:
+            flash('Daily budget cannot be greater than monthly budget!','danger')
+        else:
+            current_user.daily_budget = amount
+            db.session.commit()
     elif 'monthly_submit' in request.form and monthly_form.validate_on_submit():
         amount = monthly_form.amount.data
         rate = Exchanges.query.filter_by(id=current_user.currency_id).first().rate
