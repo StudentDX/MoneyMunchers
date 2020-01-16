@@ -197,7 +197,7 @@ def trends():
         query = Expenses.query.filter(and_(Expenses.date.between(str(start), str(date.today()+timedelta(days=1)))),Expenses.user_id==current_user.id)
         time = 'in the ' + time
     else:
-        query = Expenses.query.filter_by(user_id=current_user.id)
+        query = Expenses.query.filter_by(user_id=current_user.id).order_by(Expenses.date.desc())
         time = 'of ' + time
     history = {}
     for entry in query:

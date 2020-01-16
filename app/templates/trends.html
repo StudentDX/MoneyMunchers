@@ -32,6 +32,7 @@
                 </form>
             </div>
         </div>
+        <br>
         <div id="chartContainer"></div>
     </div>
 </div>
@@ -53,18 +54,7 @@
             axisY: {
                 title: "Money Spent ({{ get_symbol() }})"
             },
-            legend: {
-                verticalAlign: "top",
-                horizontalAlign: "right",
-                dockInsidePlotArea: true
-            },
-            toolTip: {
-                shared: true
-            },
             data: [{
-                name: "Spent",
-                showInLegend: true,
-                legendMarkerType: "square",
                 type: "area",
                 color: "rgba(40,175,101,0.6)",
                 markerSize: 0,
