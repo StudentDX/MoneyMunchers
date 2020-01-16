@@ -128,3 +128,7 @@ ericL -- 2020-01-16 03:45
 
 ericL -- 2020-01-16 04:50
     Fixed bug where daily_budget is set greater than monthly_budget
+
+ericL -- 2020-01-16 05:15
+    Fixed bug with recording expenses
+    Completed home page
