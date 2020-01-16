@@ -11,6 +11,18 @@
     .column {
         width: 50%;
     }
+    .card-header {
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        align-items: center;
+    }
+    .middle {
+        text-align: center;
+        grid-column-start: 2;
+    }
+    .btn-outline-secondary {
+        margin-left: auto;
+    }
 </style>
 {% endblock %}
 
@@ -25,8 +37,14 @@
             <div class="column">
                 <div class="card">
                     <div class="card-header">
-                      Daily Budget
-                        <a href="/expense" class="btn float-right btn-primary active" role="button" aria-pressed="true">Change Budget</a>
+                        <div class="middle">
+                            Daily Budget
+                        </div>
+                        {% if user.daily_budget is not none %}
+                        <button class="btn btn-outline-secondary" type="button" data-target="#daily" data-toggle="collapse" aria-expanded="false" aria-controls="daily">
+                            Change Budget
+                        </button>
+                        {% endif %}
                     </div>
                     <div class="card-body">
                         {% if user.daily_budget is not none %}
@@ -43,28 +61,32 @@
                             <button class="btn btn-primary" type="button" data-target="#daily" data-toggle="collapse" aria-expanded="false" aria-controls="daily">
                                 Set one now
                             </button>
-                            <div class="collapse" id="daily">
-                                <hr>
-                                <form method="POST">
-                                    {{ daily.csrf_token }}
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">$</span>
-                                        </div>
-                                        {{ daily.amount() }}
-                                    </div>
-                                    <div class="input-group-append">{{ daily.submit() }}</div>
-                                </form>
-                            </div>
                         {% endif %}
+                        <div class="collapse" id="daily">
+                            <br>
+                            <form method="POST">
+                                {{ daily.csrf_token }}
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    {{ daily.amount() }}
+                                </div>
+                                <div class="input-group-append">{{ daily.submit() }}</div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="column">
                 <div class="card">
                     <div class="card-header">
-                      Monthly Budget
-                      <a href="/expense" class="btn float-right btn-primary active" role="button" aria-pressed="true">Change Budget</a>
+                        <div class="middle">Monthly Budget</div>
+                        {% if user.monthly_budget is not none %}
+                        <button class="btn btn-outline-secondary" type="button" data-target="#monthly" data-toggle="collapse" aria-expanded="false" aria-controls="monthly">
+                            Change Budget
+                        </button>
+                        {% endif %}
                     </div>
                     <div class="card-body">
                         {% if user.monthly_budget is not none %}
@@ -81,20 +103,20 @@
                             <button class="btn btn-primary" type="button" data-target="#monthly" data-toggle="collapse" aria-expanded="false" aria-controls="monthly">
                                 Set one now
                             </button>
-                            <div class="collapse" id="monthly">
-                            <hr>
-                                <form method="POST">
-                                    {{ monthly.csrf_token }}
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">$</span>
-                                        </div>
-                                        {{ monthly.amount() }}
-                                    </div>
-                                    <div class="input-group-append">{{ monthly.submit() }}</div>
-                                </form>
-                            </div>
                         {% endif %}
+                        <div class="collapse" id="monthly">
+                            <br>
+                            <form method="POST">
+                                {{ monthly.csrf_token }}
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">$</span>
+                                    </div>
+                                    {{ monthly.amount() }}
+                                </div>
+                                <div class="input-group-append">{{ monthly.submit() }}</div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -102,8 +124,10 @@
         <div class="row">
             <div class="card" style="width:100%">
                 <div class="card-header" align="center">
-                  Expense History
-                  <a href="/expense" class="btn float-right btn-primary active" role="button" aria-pressed="true">Add Expenses</a>
+                    <div class="middle">Expense History</div>
+                    <a href={{ url_for('expense') }} class="btn btn-outline-secondary" role="button">
+                        Add Expenses
+                    </a>
                 </div>
                 <div class="card-body" style="text-align: center">
                     {% if user.expenses|length > 0 %}
