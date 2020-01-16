@@ -10,12 +10,15 @@ class Users(db.Model,UserMixin):
     password = db.Column(db.String(80),nullable=False)
     daily_budget = db.Column(db.Float)
     monthly_budget = db.Column(db.Float)
+    currency_id = db.Column(db.ForeignKey('exchanges.id'))
 
+    currency = db.relationship('Exchanges')
     expenses = db.relationship('Expenses',backref='user')
 
     def __init__(self,username,password):
         self.username = username
         self.password = password
+        self.currency_id = 11
 
     def daily_balance(self):
         balance = self.daily_budget
@@ -28,6 +31,9 @@ class Users(db.Model,UserMixin):
         for expense in [e for e in self.expenses if e.date[:7] == str(date.today())[:7]]:
             balance -= expense.amount
         return balance
+
+    def get_currency(self):
+        return Exchanges.query.filter_by(id=self.currency_id).first().currency
 
 class Expenses(db.Model):
     id = db.Column(db.Integer,primary_key=True,nullable=False)
@@ -43,3 +49,14 @@ class Expenses(db.Model):
         self.place = place
         self.date = date
         self.type = type
+
+class Exchanges(db.Model):
+    id = db.Column(db.Integer,primary_key=True,nullable=False)
+    currency = db.Column(db.String(3),nullable=False,unique=True)
+    symbol = db.Column(db.String(1),nullable=False)
+    rate = db.Column(db.Float,nullable=False)
+
+    def __init__(self,currency,symbol,rate):
+        self.currency = currency
+        self.symbol = symbol
+        self.rate = rate

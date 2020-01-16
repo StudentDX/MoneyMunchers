@@ -1,6 +1,6 @@
 from os import urandom
 from flask import Flask, render_template, request, session, redirect, url_for, flash
-from app.models import db, Users, Expenses
+from app.models import db, Users, Expenses, Exchanges
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from functools import wraps
 
@@ -13,10 +13,12 @@ app.config['SECRET_KEY'] = urandom(64)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../data/database.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = 'False'
 
+currencies = []
 db.init_app(app)
 with app.app_context():
     db.create_all()
     update_rates()
+    currencies = [[e.currency,e.symbol] for e in Exchanges.query.all()]
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -33,10 +35,13 @@ def restrict_authenticated(route):
         return route(*args,**kwargs)
     return restrict
 
-def to_money(decimal):
-        return '$'+str(decimal) + ('0' if str(decimal)[-2:] == '.0' else '')
+def to_money(amount):
+    exchange = Exchanges.query.filter_by(id=current_user.currency_id).first()
+    exchanged = round(amount * exchange.rate,2)
+    return exchange.symbol + str(exchanged) + ('0' if str(exchanged)[-2:] == '.0' else '')
 
 app.jinja_env.filters['to_money'] = to_money
+app.jinja_env.globals.update(currencies=currencies)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -111,7 +116,10 @@ def profile():
             flash('You have exceeded your monthly budget.', 'danger')
     daily_form = BudgetForm('daily_submit')
     monthly_form = BudgetForm('monthly_submit')
-    if 'daily_submit' in request.form and daily_form.validate_on_submit():
+    if 'currency' in request.form:
+        current_user.currency_id = Exchanges.query.filter_by(currency=request.form['currency']).first().id
+        db.session.commit()
+    elif 'daily_submit' in request.form and daily_form.validate_on_submit():
         amount = daily_form.amount.data
         current_user.daily_budget = amount
         db.session.commit()
