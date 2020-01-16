@@ -159,7 +159,7 @@ def expense():
     if 'currency' in request.form:
         current_user.currency_id = Exchanges.query.filter_by(currency=request.form['currency']).first().id
         db.session.commit()
-    elif expense_form.validate_on_submit() or (len(expense_form.errors)==1 and 'time' in expense_form.errors and request.form['time'][-2:] == '00'):
+    elif (expense_form.validate_on_submit()) or (len(expense_form.errors)==1 and 'time' in expense_form.errors and len(request.form['time'])<6):
         amount = expense_form.amount.data
         rate = Exchanges.query.filter_by(id=current_user.currency_id).first().rate
         amount = float(amount) / rate
@@ -167,13 +167,15 @@ def expense():
         date = expense_form.date.data
         time = expense_form.time.data
         datetime = str(date) + ' ' + str(time)
-        type = expense_form.type.data
+        type = expense_form.type.data + (':00' if len(request.form['time'])<6 else '')
         expense = Expenses(current_user.id,amount,place,datetime,type)
         db.session.add(expense)
         db.session.commit()
         flash('Recorded expense!','success')
         return redirect(url_for('profile'))
     elif request.method == 'POST':
+        print(expense_form.errors)
+        print(request.form['time'])
         flash('Invalid expense','danger')
     return render_template('expense.html',form=expense_form)
 
@@ -197,7 +199,7 @@ def trends():
                 start = today.replace(month=12, year=today.year - 1)
         elif 'Year' in time:
             start = today.replace(today.year - 1)
-        query = Expenses.query.filter(and_(Expenses.date.between(str(start), str(date.today()+timedelta(days=1)))),Expenses.user_id==current_user.id)
+        query = Expenses.query.filter(and_(Expenses.date.between(str(start), str(date.today()+timedelta(days=1)))),Expenses.user_id==current_user.id).order_by(Expenses.date.desc())
         time = 'in the ' + time
     else:
         query = Expenses.query.filter_by(user_id=current_user.id).order_by(Expenses.date.desc())
