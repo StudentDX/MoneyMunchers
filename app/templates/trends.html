@@ -13,6 +13,7 @@
 {% endblock %}
 
 {% block content %}
+<span style="display: none" id="hidden">{{ time }}</span>
 <div class="container">
     <div class="flex">
         <div class="card">
@@ -79,4 +80,5 @@
         chart.render();
     }
 </script>
+<script src="../static/js/trends.js"></script>
 {% endblock%}
