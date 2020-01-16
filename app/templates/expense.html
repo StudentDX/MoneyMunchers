@@ -13,7 +13,7 @@
                     <label for="amount">{{ form.amount.label }}</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">$</span>
+                            <span class="input-group-text">{{ get_symbol() }}</span>
                         </div>
                         {{ form.amount }}
                     </div>

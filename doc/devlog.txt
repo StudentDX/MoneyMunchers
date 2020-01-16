@@ -101,3 +101,7 @@ ericL -- 2020-01-14 23:59
 vishwaaS -- 2020-01-15 8:40
     Added text for home
     Made functionality changes to profile
+
+davidX -- 2020-01-16 01:09
+    Renamed and updated api cards to fit with requirements.
+    Made team flag.

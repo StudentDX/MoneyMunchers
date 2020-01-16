@@ -68,7 +68,7 @@
                                 {{ daily.csrf_token }}
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text">$</span>
+                                        <span class="input-group-text">{{ get_symbol() }}</span>
                                     </div>
                                     {{ daily.amount() }}
                                 </div>
@@ -110,7 +110,7 @@
                                 {{ monthly.csrf_token }}
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text">$</span>
+                                        <span class="input-group-text">{{ get_symbol() }}</span>
                                     </div>
                                     {{ monthly.amount() }}
                                 </div>
