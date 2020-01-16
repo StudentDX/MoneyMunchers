@@ -156,7 +156,7 @@ def expense():
     if 'currency' in request.form:
         current_user.currency_id = Exchanges.query.filter_by(currency=request.form['currency']).first().id
         db.session.commit()
-    elif expense_form.validate_on_submit():
+    elif expense_form.validate_on_submit() or (len(expense_form.errors)==1 and 'time' in expense_form.errors and request.form['time'][-2:] == '00'):
         amount = expense_form.amount.data
         rate = Exchanges.query.filter_by(id=current_user.currency_id).first().rate
         amount = float(amount) / rate
@@ -171,8 +171,6 @@ def expense():
         flash('Recorded expense!','success')
         return redirect(url_for('profile'))
     elif request.method == 'POST':
-        print(expense_form.errors)
-        print(request.form['time'])
         flash('Invalid expense','danger')
     return render_template('expense.html',form=expense_form)
 
