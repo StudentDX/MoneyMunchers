@@ -129,10 +129,14 @@ def profile():
         db.session.commit()
     elif 'daily_submit' in request.form and daily_form.validate_on_submit():
         amount = daily_form.amount.data
+        rate = Exchanges.query.filter_by(id=current_user.currency_id).first().rate
+        amount = float(amount) / rate
         current_user.daily_budget = amount
         db.session.commit()
     elif 'monthly_submit' in request.form and monthly_form.validate_on_submit():
         amount = monthly_form.amount.data
+        rate = Exchanges.query.filter_by(id=current_user.currency_id).first().rate
+        amount = float(amount) / rate
         if current_user.daily_budget is not None and amount < current_user.daily_budget:
             flash('Monthly budget cannot be less than daily budget!','danger')
         else:
@@ -151,6 +155,8 @@ def expense():
         db.session.commit()
     elif expense_form.validate_on_submit():
         amount = expense_form.amount.data
+        rate = Exchanges.query.filter_by(id=current_user.currency_id).first().rate
+        amount = float(amount) / rate
         place = expense_form.location.data
         date = expense_form.date.data
         time = expense_form.time.data
