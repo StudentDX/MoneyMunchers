@@ -14,21 +14,11 @@ Our project is a budget management application. Users will be able to record the
 * [Exchange Rates API](https://docs.google.com/document/d/1BDjby5I0kwVJHwZqG5sdHL-vToQsQI_oxhmlBbA87bM/edit)
   * Gives a list of all conversion rates of currencies around the world.
   * Will allow the user to input a different currency than the one they normally use.
-* [IPstack API](https://docs.google.com/document/d/1JLCpSsibgXBVDN8C8FwyYYiO1jIob_qk1owP3F1gNyQ/edit)
-  * Returns information regarding the users IP address and location.
-  * Will be used in conjuction with Google Places API by providing the IP address.
-* [Google Places API](https://docs.google.com/document/d/1zLgw_m5zhouRFc_Vm21_RTpCQwBbu_Cr2zOJH9VGL3o/edit)
-  * Returns more list of possible locations of the user with regards to their IP address.
-  * Will allow user to choose from a list of locations when they input their expenditure information.
 * [CanvasJS Graphing API](https://docs.google.com/document/d/1CGVWZKRGY5PUvfaPLchy5yb2WyTaq3vBLx04mmNxk-8/edit)
   * Creates a chart using javascript and HTML
   * Will be used to display trends in the users expenditures over time.
 
 ## How to Use:
-Input your API keys:
-* "API that needs key"
-  * "instructions to get key"
-  
 Create a virtual machine:
 ```
 python3 -m venv <hero>
