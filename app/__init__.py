@@ -35,12 +35,19 @@ def restrict_authenticated(route):
         return route(*args,**kwargs)
     return restrict
 
+def get_symbol():
+    return Exchanges.query.filter_by(id=current_user.currency_id).first().symbol
+
 def to_money(amount):
     exchange = Exchanges.query.filter_by(id=current_user.currency_id).first()
     exchanged = round(amount * exchange.rate,2)
-    return exchange.symbol + str(exchanged) + ('0' if str(exchanged)[-2:] == '.0' else '')
+    if amount < 0:
+        return '-'+exchange.symbol+str(exchanged)[1:]+('0' if str(exchanged)[-2] == '.' else '')
+    else:
+        return exchange.symbol + str(exchanged) + ('0' if str(exchanged)[-2] == '.' else '')
 
 app.jinja_env.filters['to_money'] = to_money
+app.jinja_env.globals.update(get_symbol=get_symbol)
 app.jinja_env.globals.update(currencies=currencies)
 
 @login_manager.user_loader
@@ -50,6 +57,7 @@ def load_user(user_id):
 @app.route('/')
 @app.route('/home')
 def home():
+    print(request.endpoint)
     return render_template('home.html')
 
 @app.route('/help.html')
@@ -138,7 +146,10 @@ def profile():
 @login_required
 def expense():
     expense_form = ExpenseForm()
-    if expense_form.validate_on_submit():
+    if 'currency' in request.form:
+        current_user.currency_id = Exchanges.query.filter_by(currency=request.form['currency']).first().id
+        db.session.commit()
+    elif expense_form.validate_on_submit():
         amount = expense_form.amount.data
         place = expense_form.location.data
         date = expense_form.date.data
