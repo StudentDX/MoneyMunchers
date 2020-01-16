@@ -102,6 +102,29 @@ vishwaaS -- 2020-01-15 8:40
     Added text for home
     Made functionality changes to profile
 
+ericL -- 2020-01-15 10:40
+    Changed help route to not be completely static
+    Implemented updating budgets
+
+ericL -- 2020-01-16 12:40
+    Implemented exchange rates
+    Deleted unused templates
+    Fixed bugs with displaying currencies
+    Changed form prepends to also change with currency
+
 davidX -- 2020-01-16 01:09
     Renamed and updated api cards to fit with requirements.
     Made team flag.
+
+ericL -- 2020-01-16 02:40
+    Implemented trends
+    Fixed bug where times ending in 00 seconds were invalid
+    Fixed bug where select fields remained on the same option
+    Fixed bug where trends connected points in the wrong order
+    Added titles to every page
+
+ericL -- 2020-01-16 03:45
+    Brought repo into compliance—including design doc, launch codes, 411
+
+ericL -- 2020-01-16 04:50
+    Fixed bug where daily_budget is set greater than monthly_budget
