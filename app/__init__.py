@@ -3,6 +3,8 @@ from flask import Flask, render_template, request, session, redirect, url_for, f
 from app.models import db, Users, Expenses, Exchanges
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from functools import wraps
+from datetime import date, timedelta
+from sqlalchemy import and_
 
 from app.forms import SignUpForm, LogInForm, BudgetForm, ExpenseForm
 from app.exchange_rates import update_rates
@@ -48,6 +50,7 @@ def to_money(amount):
 
 app.jinja_env.filters['to_money'] = to_money
 app.jinja_env.globals.update(get_symbol=get_symbol)
+app.jinja_env.globals.update(list=list)
 app.jinja_env.globals.update(currencies=currencies)
 
 @login_manager.user_loader
@@ -172,3 +175,36 @@ def expense():
         print(request.form['time'])
         flash('Invalid expense','danger')
     return render_template('expense.html',form=expense_form)
+
+@app.route('/trends',methods=['GET','POST'])
+@login_required
+def trends():
+    time = 'Past Week'
+    if 'currency' in request.form:
+        current_user.currency_id = Exchanges.query.filter_by(currency=request.form['currency']).first().id
+        db.session.commit()
+    elif 'time' in request.form:
+        time = request.form['time']
+    today = date.today()
+    if 'Past' in time:
+        if 'Week' in time:
+            start = today - timedelta(weeks=1)
+        elif 'Month' in time:
+            if today.month > 1:
+                start = today.replace(month=today.month - 1)
+            else:
+                start = today.replace(month=12, year=today.year - 1)
+        elif 'Year' in time:
+            start = today.replace(today.year - 1)
+        query = Expenses.query.filter(and_(Expenses.date.between(str(start), str(date.today()+timedelta(days=1)))),Expenses.user_id==current_user.id)
+        time = 'in the ' + time
+    else:
+        query = Expenses.query.filter_by(user_id=current_user.id)
+        time = 'of ' + time
+    history = {}
+    for entry in query:
+        if entry.date[:10] not in history:
+            history[entry.date[:10]] = entry.amount
+        else:
+            history[entry.date[:10]] += entry.amount
+    return render_template('trends.html',time=time,history=history)

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}Trends{% endblock %}
+
+{% block style %}
+<style>
+    .flex{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="flex">
+        <div class="card">
+            <div class="card-header">Trends</div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="interval">Time Interval</label>
+                        <select name="time" class="custom-select" id="interval" onchange="this.form.submit()">
+                            <option value="Past Week" id="week">Past Week</option>
+                            <option value="Past Month" id="month">Past Month</option>
+                            <option value="Past Year" id="year">Past Year</option>
+                            <option value="All Time" id="all">All Time</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="chartContainer"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script>
+    window.onload = function () {
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            title: {
+                text: "{{ budget }} Budget Spending {{ time }}"
+            },
+            axisX: {
+                title: "Time",
+                valueFormatString: "MMM DD YYYY"
+            },
+            axisY: {
+                title: "Money Spent ({{ get_symbol() }})"
+            },
+            legend: {
+                verticalAlign: "top",
+                horizontalAlign: "right",
+                dockInsidePlotArea: true
+            },
+            toolTip: {
+                shared: true
+            },
+            data: [{
+                name: "Spent",
+                showInLegend: true,
+                legendMarkerType: "square",
+                type: "area",
+                color: "rgba(40,175,101,0.6)",
+                markerSize: 0,
+                dataPoints: [
+                    {% set keys = list(history.keys()) %}
+                    {% for datum in keys[:-1] %}
+                        {x: new Date({{ datum[:4] }},{{ datum[5:7] }},{{ datum[8:10] }}), y: {{ history[datum] }} },
+                    {% endfor %}
+                    {x: new Date({{ keys[-1][:4] }},{{ keys[-1][5:7] }},{{ keys[-1][8:10] }}), y: {{ history[keys[-1]] }} },
+                ]
+            }]
+        });
+        chart.render();
+    }
+</script>
+{% endblock%}
