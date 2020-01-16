@@ -5,6 +5,7 @@ from flask_login import LoginManager, login_required, login_user, logout_user, c
 from functools import wraps
 
 from app.forms import SignUpForm, LogInForm, BudgetForm, ExpenseForm
+from app.exchange_rates import update_rates
 
 app = Flask(__name__)
 
@@ -15,6 +16,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = 'False'
 db.init_app(app)
 with app.app_context():
     db.create_all()
+    update_rates()
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -44,6 +46,10 @@ def load_user(user_id):
 @app.route('/home')
 def home():
     return render_template('home.html')
+
+@app.route('/help.html')
+def help():
+    return render_template('help.html')
 
 @app.route('/signup',methods=['GET','POST'])
 @restrict_authenticated
