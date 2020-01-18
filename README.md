@@ -10,6 +10,8 @@
 ## Description:
 Our project is a budget management application. Users will be able to record their expenses and allot a budget. They can set a budget and our website will tell them if they are saving or overspending. We’ll alert them in instances where they are in danger of going over the budget. Users will be able to see trends in their expenditures over time and how much they have saved.
 
+## [Video Demo](https://youtu.be/ZTnAUi1clLA)
+
 ## APIs:
 * [Exchange Rates API](https://docs.google.com/document/d/1BDjby5I0kwVJHwZqG5sdHL-vToQsQI_oxhmlBbA87bM/edit)
   * Gives a list of all conversion rates of currencies around the world.
